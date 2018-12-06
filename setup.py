@@ -18,7 +18,16 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=[
-        '',
+        'jsonschema==2.6.0',
+        'matplotlib==3.0.1',
+        'numpy==1.15.3',
+        'opencv-python==3.4.3.18',
+        'pandocfilters==1.4.2',
+        'scikit-image==0.14.1',
+        'scipy==1.1.0',
+        'see==1.4.1',
+        'six==1.11.0',
+        'tensorflow==1.11.0'
     ],
     extras_require={
         'test': [
