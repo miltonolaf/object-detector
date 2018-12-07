@@ -13,6 +13,10 @@ class Config(object):
         self.config_definition()
         print(os.path.dirname(os.path.abspath(__file__)))
 
+    def init_config(self):
+        shutil.copyfileobj(os.path.dirname(os.path.abspath(__file__)) + '/template.config.json',
+                          self.project_path + '/tod.config.json')
+
     def get_config(self):
         try:
             with open(self.project_path + '/tod.config.json') as json_file:
