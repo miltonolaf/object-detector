@@ -1,5 +1,6 @@
 {
   "models_dir": "downloaded_models",
+  "images_dir": "test_images",
   "models": {
   },
   "ic_models": {
