@@ -1,5 +1,4 @@
 import click
-import json
 
 CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 
@@ -13,13 +12,21 @@ def cli():
 @click.command('demo', short_help='Run demos')
 @click.option('-D', '--download', is_flag=True,
               help='Download all pre-trained models.')
-def demo(download):
+@click.option('-E', '--exec', default='ssd',
+              help='Run pre-trained models.')
+@click.option('-I', '--img', default='test.jpg',
+              help='Run pre-trained models.')
+def demo(download, exec, img):
     """Play with pre-trained models and check your functionality for yourself
     """
     if download:
         from tf_object_detector.demo import demo_download
-        click.echo('test')
         demo_download()
+
+    if exec:
+        from tf_object_detector.demo import Demo
+        dm = Demo(model_name=exec)
+        dm.exec('static', img)
 
 
 cli.add_command(demo)
@@ -32,5 +39,6 @@ def init():
     from tf_object_detector.config import Config
     cfg = Config()
     cfg.init_config()
+
 
 cli.add_command(init)
