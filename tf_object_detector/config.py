@@ -13,8 +13,12 @@ class Config(object):
 
     def init_config(self):
         shutil.copy(os.path.dirname(os.path.abspath(__file__)) + '/template.config.json',
-                    self.project_path + '/tod.config.json')
-        click.echo('Initialized!')
+                    self.project_path + '/tensorobject.config.json')
+        click.echo('Configuration file created in: %s/tensorobject.config.json' % self.project_path)
+        shutil.copytree(os.path.dirname(os.path.abspath(__file__)) + '/data_template',
+                                        self.project_path + '/data')
+        click.echo('Data folder created in: %s/data/' % self.project_path)
+        click.echo('\nInitialized!')
 
     def get_config(self):
         try:
