@@ -16,11 +16,12 @@ def demo_download():
 
     model_url = 'http://download.tensorflow.org/models/object_detection/'
     cfg = Config()
+    cfg.config_definition()
     downloaded_models_dir = cfg.DOWNLOADED_MODELS_DIR
 
     for model, file in cfg.DEMO_MODELS.items():
         click.echo('Downloading all demo models...')
         click.echo('This may take a while.')
-        urlretrieve(model_url + file + '.tar.gz', downloaded_models_dir + file)
+        urlretrieve(model_url + file + '.tar.gz', downloaded_models_dir + '/' + file)
         tf = tarfile.open(downloaded_models_dir + '/' + file + '.tar.gz')
         tf.extractall()
