@@ -1,11 +1,11 @@
 import sys
 import cv2
+import tf_object_detector.lib.label_map_util
 import click
 import numpy as np
 import tensorflow as tf
 from copy import deepcopy
 sys.path.append("..")
-import lib.label_map_util
 
 '''
 x1,y1 ------
@@ -44,9 +44,9 @@ class Net:
             self._init_predictor()
 
     def _load_labels(self):
-        self.label_map = lib.label_map_util.load_labelmap(self.labels_fp)
-        self.categories = lib.label_map_util.convert_label_map_to_categories(self.label_map, max_num_classes=self.num_classes, use_display_name=True)
-        self.category_index = lib.label_map_util.create_category_index(self.categories)
+        self.label_map = tf_object_detector.lib.label_map_util.load_labelmap(self.labels_fp)
+        self.categories = tf_object_detector.lib.label_map_util.convert_label_map_to_categories(self.label_map, max_num_classes=self.num_classes, use_display_name=True)
+        self.category_index = tf_object_detector.lib.label_map_util.create_category_index(self.categories)
 
     def _load_graph(self):
         self.graph = tf.Graph()
@@ -66,14 +66,14 @@ class Net:
 
         font = cv2.FONT_HERSHEY_SIMPLEX
         font_scale = 1
-        font_color = (0, 255, 0)
+        font_color = (255, 0, 0)
         line_type = 2
-        offset = 20
+        offset = 10
         for res in filtered_results:
             y1, x1, y2, x2 = res["bb_o"]
             y1, y2 = int(y1 * ratio_h), int(y2 * ratio_h)
             x1, x2 = int(x1 * ratio_w), int(x2 * ratio_w)
-            cv2.rectangle(display_img, (x1, y1), (x2, y2), (255, 0, 0), 2)
+            cv2.rectangle(display_img, (x1, y1), (x2, y2), (0, 255, 0), 2)
             cv2.putText(display_img, res["class"],
                         (x1 + offset, y1 - offset),
                         font,
@@ -99,7 +99,7 @@ class Net:
         self.in_progress = True
 
         with self.graph.as_default():
-            click.echo('[INFO] Read the image...')
+            click.echo('[INFO] Read the image ..')
 
             img_copy = deepcopy(img)
             img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
@@ -116,7 +116,7 @@ class Net:
                 })
             click.echo('[INFO] Filtering results ...')
             filtered_results = []
-            for i in range(0, num_detections):
+            for i in range(0, int(num_detections)):
                 score = scores[0][i]
                 if score >= self.threshold:
                     y1, x1, y2, x2 = boxes[0][i]
