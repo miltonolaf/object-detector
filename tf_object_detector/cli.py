@@ -23,3 +23,14 @@ def demo(download):
 
 
 cli.add_command(demo)
+
+
+@click.command('init', short_help='Init app')
+def init():
+    """Initialize your project by creating the configuration file with this command
+    """
+    from tf_object_detector.config import Config
+    cfg = Config()
+    cfg.init_config()
+
+cli.add_command(init)
