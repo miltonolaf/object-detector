@@ -28,3 +28,4 @@ class Config(object):
         self.get_config()
         self.DOWNLOADED_MODELS_DIR = self.config_data['models_dir']
         self.DEMO_MODELS = self.config_data['demo_models']
+        self.IMAGES_DIR = self.config_data['images_dir']
