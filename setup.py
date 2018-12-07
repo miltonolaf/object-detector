@@ -27,7 +27,8 @@ setup(
         'scipy==1.1.0',
         'see==1.4.1',
         'six==1.11.0',
-        'tensorflow==1.11.0'
+        'tensorflow==1.11.0',
+        'click'
     ],
     extras_require={
         'test': [
@@ -35,4 +36,9 @@ setup(
             'coverage',
         ],
     },
+    entry_points={
+        'console_scripts': [
+            'tensorobject = tf_object_detector.cli:cli',
+        ],
+    }
 )
