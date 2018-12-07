@@ -10,12 +10,11 @@ class Config(object):
     def __init__(self):
         super(Config, self).__init__()
         self.project_path = os.getcwd()
-        self.config_definition()
-        print(os.path.dirname(os.path.abspath(__file__)))
 
     def init_config(self):
-        shutil.copyfileobj(os.path.dirname(os.path.abspath(__file__)) + '/template.config.json',
-                          self.project_path + '/tod.config.json')
+        shutil.copy(os.path.dirname(os.path.abspath(__file__)) + '/template.config.json',
+                    self.project_path + '/tod.config.json')
+        click.echo('Initialized!')
 
     def get_config(self):
         try:
